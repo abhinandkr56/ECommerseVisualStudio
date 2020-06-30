@@ -1,0 +1,9 @@
+G:\vs\EcommerseVisualstudio\Core\bin\Debug\netstandard2.0\Core.deps.json
+G:\vs\EcommerseVisualstudio\Core\bin\Debug\netstandard2.0\Core.dll
+G:\vs\EcommerseVisualstudio\Core\bin\Debug\netstandard2.0\Core.pdb
+G:\vs\EcommerseVisualstudio\Core\obj\Debug\netstandard2.0\Core.csprojAssemblyReference.cache
+G:\vs\EcommerseVisualstudio\Core\obj\Debug\netstandard2.0\Core.AssemblyInfoInputs.cache
+G:\vs\EcommerseVisualstudio\Core\obj\Debug\netstandard2.0\Core.AssemblyInfo.cs
+G:\vs\EcommerseVisualstudio\Core\obj\Debug\netstandard2.0\Core.csproj.CoreCompileInputs.cache
+G:\vs\EcommerseVisualstudio\Core\obj\Debug\netstandard2.0\Core.dll
+G:\vs\EcommerseVisualstudio\Core\obj\Debug\netstandard2.0\Core.pdb
