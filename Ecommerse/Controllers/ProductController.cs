@@ -32,5 +32,18 @@ namespace Ecommerse.Controllers
 
             return await _repo.GetProductByIdAsync(id);
         }
+        [HttpGet("brands")]
+        public async Task<ActionResult<List<ProductBrand>>> GetProductBrands()
+        {
+            var ProductBrand = await _repo.GetProductBrandsAsync();
+            return Ok(ProductBrand);
+
+        }
+        [HttpGet("types")]
+        public async Task<ActionResult<List<ProductType>>> GetProductTypes()
+        {
+            var ProductType = await _repo.GetProductTypesAsync();
+            return Ok(ProductType);
+        }
     }
 }
