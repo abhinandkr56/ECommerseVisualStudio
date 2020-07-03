@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Core.Interfaces;
+using Ecommerse.Helpers;
 using Infrastrcture.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +33,7 @@ namespace Ecommerse
         {
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped(typeof(IGenericsRepository<>), typeof(GenericsRepository<>));
+            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             services.AddDbContext<StoreContext>(x => x.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
         }
@@ -46,6 +49,7 @@ namespace Ecommerse
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
