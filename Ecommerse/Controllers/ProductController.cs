@@ -14,9 +14,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerse.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
+   
+    public class ProductController : BaseApiController
     {
         private readonly IGenericsRepository<Product> _productRepo;
         private readonly IGenericsRepository<ProductBrand> _productBrandRepo;
