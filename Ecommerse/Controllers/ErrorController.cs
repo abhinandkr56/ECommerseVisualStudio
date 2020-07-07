@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ecommerse.Controllers
 {
     [Route("errors/{code}")]
-    [ApiController]
+    [ApiExplorerSettings(IgnoreApi =true)]
     public class ErrorController : BaseApiController
     {
         public IActionResult Error(int code)

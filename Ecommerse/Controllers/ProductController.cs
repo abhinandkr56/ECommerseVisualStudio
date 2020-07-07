@@ -7,6 +7,7 @@ using Core.Entity;
 using Core.Interfaces;
 using Core.Specification;
 using Ecommerse.DTO;
+using Ecommerse.Error;
 using Infrastrcture.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,8 @@ namespace Ecommerse.Controllers
             return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
         }
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithTypesandBrandsSpecification(id);
