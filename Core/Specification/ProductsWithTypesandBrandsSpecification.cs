@@ -1,4 +1,5 @@
 ﻿using Core.Entity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,19 +8,22 @@ namespace Core.Specification
 {
     public class ProductsWithTypesandBrandsSpecification:BaseSpecification<Product>
     {
-        public ProductsWithTypesandBrandsSpecification(string sort)
+        public ProductsWithTypesandBrandsSpecification(ProductSpecParams productSpecParams)
+            :base(x=>(!productSpecParams.BrandId.HasValue || x.ProductBrandId==productSpecParams.BrandId)&&
+            (!productSpecParams.TypeId.HasValue || x.ProductTypeId==productSpecParams.TypeId))
         {
             AddInclude(X => X.ProductType);
             AddInclude(X => X.ProductBrand);
             AddOrderBy(x => x.Name);
-            if (!string.IsNullOrEmpty(sort))
+            ApplyPaging(productSpecParams.PageSize * (productSpecParams.PageIndex - 1), productSpecParams.PageSize);
+            if (!string.IsNullOrEmpty(productSpecParams.Sort))
             {
-                switch (sort)
+                switch (productSpecParams.Sort)
                 {
                     case "priceAsc":
                         AddOrderBy(p => p.Price);
                         break;
-                    case "priceDes":
+                    case "priceDesc":
                         AddOrderByDesc(p => p.Price);
                         break;
                     default:

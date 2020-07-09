@@ -8,6 +8,7 @@ using Core.Interfaces;
 using Core.Specification;
 using Ecommerse.DTO;
 using Ecommerse.Error;
+using Ecommerse.Helpers;
 using Infrastrcture.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,11 +32,15 @@ namespace Ecommerse.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort)
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productSpecParams)
         {
-            var spec = new ProductsWithTypesandBrandsSpecification(sort);
+            var spec = new ProductsWithTypesandBrandsSpecification(productSpecParams);
+            var countspec=new ProductwithFiltersForCountSpecification(productSpecParams);
+            var totalItems = await _productRepo.CountAsync(countspec);
+
             var products = await _productRepo.LisAsync(spec);
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
+            var data=_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+            return Ok(new Pagination<ProductToReturnDto>(productSpecParams.PageIndex, productSpecParams.PageSize, totalItems, data));
         }
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
